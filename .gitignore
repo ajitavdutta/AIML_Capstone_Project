@@ -1,0 +1,7 @@
+.DS_Store
+backend/library/.DS_Store
+backend/db.sqlite3
+backend/.DS_Store
+backend/media/dicom/*.dcm
+backend/library/
+backend/media/png/*.png

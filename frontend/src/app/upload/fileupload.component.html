@@ -1,57 +1,69 @@
-<div class="container full-width-div">
+<div class="container border" style="width: 100%;">
+  <!-- Tab -->
   <div class="row">
-    <div class="col">
-      <mat-card class="file-card">
-        <mat-card-header>
-          <mat-card-title>Detect Penumonia</mat-card-title>
-        </mat-card-header>
-        <div class="mx-auto image-div">
-          <img mat-card-image class="border" 
-                src="{{ imageURL }}" onerror="this.src='assets/images/Upload-Default.png'" 
-                style="margin-top: 10px; margin-bottom:10px;">
+    <mat-tab-group>
+      <mat-tab label="X-Ray">
+        <div class="row" style="width: 100%;">
+          <h2>Detect Penumonia</h2>
         </div>
-        <mat-divider inset></mat-divider>
-        <br>
-        <mat-card-content>
-          <p> {{fileName || "No file selected yet."}} </p>
-        </mat-card-content>
-        <mat-divider inset></mat-divider>
-        <mat-card-actions>
-          <button  mat-raised-button ngClass="btn btn-outline-primary" (click)="fileInput.click()">
-            <span>Upload</span>
-            <mat-icon>attach_file</mat-icon>
-            <input type="file" class="file-input" [accept]="requiredFileType" 
-            (change)="onFileSelected($event);" #fileInput>
-          </button>
-          <button  mat-raised-button ngClass="btn btn-outline-secondary" (click)="onPredict()" [disabled]="!fileId">
-            <span>Predict</span>
-            <mat-icon>compare</mat-icon>
-          </button>
-        </mat-card-actions>
-        
-        <!-- <mat-card-footer>
-          <mat-progress-bar mode="determinate" [value]="uploadProgress"></mat-progress-bar>
-        </mat-card-footer> -->
-    </mat-card>
-    </div>
+        <div class="row" style="width: 100%;">
+          <div class="col justify-div">
+            <p>
+              Upload a Chest X-Ray file which should be in DICOM (*.dcm) format.Once it is successfully upload to the
+              server, click Predict to predict if the
+              Chest X-Ray has any inflammation area which is an indication of Penumonia. If Penumonia is identified the
+              infected area in the Chest X-ray will be highlighted by a bounding box in
+              the Image.
+            </p>
+            <p>
+              <b>Note: </b>To see the Tags associated with the DICOM file. Please go to the next Tab after the DICOM
+              file is
+              uploaded to the server.
+            </p>
+          </div>
+          <div class="col">
+            <img mat-card-image class="center" src="{{ imageURL }}"
+              onerror="this.src='assets/images/Upload-Default.png'" style="margin-top: 10px; margin-bottom:10px;">
+          </div>
+        </div>
 
-    <div class="col">
-      <mat-card class="tag-card">
-        <mat-card-header>
-          <mat-card-title>File Tags</mat-card-title>
-          <mat-card-subtitle>DICOM file metadata</mat-card-subtitle>
-        </mat-card-header>
-        <mat-divider inset></mat-divider>
-        <br>
-        <mat-card-content>
-          <div class="tag-container mat-elevation-z8">
-            <table mat-table [dataSource]="fileTags" class="mat-elevation-z8">
+        <div class="row" style="width: 100%;">
+          <div class="col">
+            <button mat-raised-button ngClass="btn btn-outline-primary button-space" (click)="fileInput.click()">
+              <span>Upload</span>
+              <mat-icon>attach_file</mat-icon>
+              <input type="file" class="file-input" [accept]="requiredFileType" (change)="onFileSelected($event);"
+                #fileInput>
+            </button>
+            <button mat-raised-button ngClass="btn btn-outline-secondary button-space" (click)="onPredict()"
+              [disabled]="!fileId">
+              <span>Predict</span>
+              <mat-icon>compare</mat-icon>
+            </button>
+          </div>
+
+          <div class="col">
+            <div style="margin-right: 20%; margin-left: 20%; margin-top: 10px;">
+              <h3>Prediction: {{result || "No Result."}}</h3>
+            </div>
+          </div>
+        </div>
+
+      </mat-tab>
+      <mat-tab label="Tags">
+        <div class="row" style="width: 100%;">
+          <h2>DICOM Tags</h2>
+        </div>
+        <div class="row border"
+          style="margin-right: 10px; margin-left: 10px; margin-top: 5px; margin-bottom: 5px; height: 475px">
+          <div class="mat-elevation-z8" style="width: 100%; height: 100%; overflow: scroll;">
+            <table mat-table [dataSource]="fileTags" class="mat-elevation-z8" style="width: 100%;">
               <!-- Tag Column -->
               <ng-container matColumnDef="tag">
                 <th mat-header-cell *matHeaderCellDef> Tag </th>
                 <td mat-cell *matCellDef="let element"> {{element.tag}} </td>
               </ng-container>
-  
+
               <!-- Value Column -->
               <ng-container matColumnDef="value">
                 <th mat-header-cell *matHeaderCellDef> Value </th>
@@ -61,18 +73,12 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
           </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
   </div>
-  <br>
+  <!-- Prediction Result -->
   <div class="row">
-    <div class="col">
-      <mat-card class="result-card">
-        <mat-card-content>
-          <h3>Prediction: {{result || "No Result."}}</h3>
-        </mat-card-content>
-      </mat-card>
-    </div>
+
   </div>
 </div>
