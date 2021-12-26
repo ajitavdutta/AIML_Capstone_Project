@@ -6,3 +6,5 @@ backend/.DS_Store
 backend/media/dicom/*.dcm
 backend/media/png/*.png
 /backend/.idea/
+/backend/media/dicom/
+/backend/media/png/
