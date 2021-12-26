@@ -93,8 +93,8 @@ Before you can run the application you need to place your saved keras model in t
 If you want to change the model name you need to update the following params in **backend/backend_app/settings.py**
 
 ```
-CLASSIFICATION_MODEL = 'Classification.h5'
-DETECTION_MODEL = 'DetectionModel.h5'
+CLASSIFICATION_MODEL_NAME = 'Classification.h5'
+DETECTION_MODEL_NAME = 'DetectionModel.h5'
 ```
 
 Build the application:
