@@ -1,7 +1,7 @@
 # AIML_Capstone_Project
 ## Great Learning Capstone Project - RSNA Pneumonia Detection Challenge
 
-Penumonia Detection application using Django and Angular.
+Pneumonia Detection application using Django and Angular.
 
 All coding/implementation contributions and comments are welcome. 
 Releases should be ready for deployment otherwise download the code and install dependencies using **pip** and **npm**.
@@ -19,14 +19,14 @@ npm -v
 ```
 
 ### Install Angular
-The frontent is created using [Angular](https://angular.io/). To install Angular run the following command in the command-prompt/terminal:
+The frontend is created using [Angular](https://angular.io/). To install Angular run the following command in the command-prompt/terminal:
 
 ```
 npm install =g @angular/cli
 ```
 
-We have also use Angular Material UI components which needs to be installed seperately.
-Execute the below command to install Angulae Material UI components
+We have also use Angular Material UI components which needs to be installed separately.
+Execute the below command to install Angular Material UI components
 
 ```
 npm install -g @angular/material
@@ -67,7 +67,7 @@ Open a command-prompt/terminal in the following location
 
 <..>/AIML_Capstone_Project/backend
 
-Activate the virtual environment. This will create a vitrual environment if not present 
+Activate the virtual environment. This will create a virtual environment if not present 
 
 ```
 pipenv shell
@@ -80,11 +80,11 @@ pipenv install -r requirements.txt
 pip freeze
 ```
 
-**Note**: Required only for fresh install. Skip for existing project.
+**Note**: Required only for fresh installation. Skip for existing project.
 
 Before you can run the application you need to place your saved keras model in the following location:
 
-<..>/AIML_Capstone_Project/backend/library/model
+<./.>/AIML_Capstone_Project/backend/library/model
 
 **Note** Currently the model is named as following:
 * Classification.h5 - DenseNet201 classification model
