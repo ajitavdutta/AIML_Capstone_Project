@@ -1,4 +1,5 @@
 .DS_Store
+.idea/*
 backend/library/.DS_Store
 backend/db.sqlite3
 backend/.DS_Store
