@@ -44,12 +44,12 @@
 
           <div class="col">
             <div style="margin-right: 20%; margin-left: 20%; margin-top: 10px;">
-              <h3>Prediction: {{result || "No Result."}}</h3>
+              <h4>Prediction: {{result || "No Result."}}</h4>
             </div>
           </div>
         </div>
-
       </mat-tab>
+
       <mat-tab label="Tags">
         <div class="row" style="width: 100%;">
           <h2>DICOM Tags</h2>
@@ -75,10 +75,18 @@
           </div>
         </div>
       </mat-tab>
+      
+      <mat-tab label="Team">
+        <div class="container" style="height: 530px;">
+          <br>
+          <ul style="list-style-type:disc;">
+            <li>Ajitav Dutta</li>
+            <li>Srinivasa Reddy V</li>
+            <li>Apoorva Mohan</li>
+            <li>Godson DS</li>
+          </ul>
+        </div>
+      </mat-tab>
     </mat-tab-group>
-  </div>
-  <!-- Prediction Result -->
-  <div class="row">
-
   </div>
 </div>
