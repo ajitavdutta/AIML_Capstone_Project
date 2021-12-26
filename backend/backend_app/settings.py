@@ -137,5 +137,9 @@ CORS_ORIGIN_ALLOW_ALL =  True
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-CLS_MODEL_FILE = os.path.join(BASE_DIR, 'library', 'model', 'DenseNet201.h5')
-DENSENET_MODEL = keras.models.load_model(CLS_MODEL_FILE)
+CLASSIFICATION_MODEL_NAME = 'Classification.h5'
+DETECTION_MODEL_NAME = 'DetectionModel.h5'
+
+CLASSIFICATION_MODEL = keras.models.load_model(os.path.join(BASE_DIR, 'library', 'model', CLASSIFICATION_MODEL_NAME))
+# DETECTION_MODEL = keras.models.load_model(os.path.join(BASE_DIR, 'library', 'model', DETECTION_MODEL_NAME))
+

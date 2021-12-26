@@ -33,7 +33,7 @@ class PredictView(APIView):
         x.append(image)
         x = np.array(x)
 
-        predict = settings.DENSENET_MODEL.predict(x)
+        predict = settings.CLASSIFICATION_MODEL.predict(x)
         print(predict)
         predict = np.round(predict).astype(int)
         print(predict)

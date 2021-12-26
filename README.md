@@ -55,7 +55,6 @@ We will install pipenv using pip using the following command:
 pip install pipenv
 ```
 
-
 ## Steps to Run the application
 
 ### Python (Django) Backend - Web Server
