@@ -54,6 +54,10 @@ We will install pipenv using pip using the following command:
 ```
 pip install pipenv
 ```
+**Note**: For Mac - install pipenv with [Homebrew](https://brew.sh/).
+```
+brew install pipenv
+```
 
 ## Steps to Run the application
 
@@ -67,4 +71,68 @@ Activate the virtual environment. This will create a vitrual environment if not 
 
 ```
 pipenv shell
+```
+
+Install all dependencies 
+
+```
+pipenv install -r requirements.txt
+pip freeze
+```
+
+**Note**: Required only for fresh install. Skip for existing project.
+
+Before you can run the application you need to place your saved keras model in the following location:
+
+<..>/AIML_Capstone_Project/backend/library/model
+
+**Note** Currently the model is named as following:
+* Classification.h5 - DenseNet201 classification model
+* DetectionModel.h5 - YOLO Image object detection model
+
+If you want to change the model name you need to update the following params in **backend/backend_app/settings.py**
+
+```
+CLASSIFICATION_MODEL_NAME = 'Classification.h5'
+DETECTION_MODEL_NAME = 'DetectionModel.h5'
+```
+
+Build the application:
+```
+cd backend
+python manage.py makemigrations
+python manage.py migrate
+```
+
+Run the server
+```
+python manage.py runserver
+```
+
+### Angular Application - Frontend
+Open a command-prompt/terminal in the following location
+
+<..>/AIML_Capstone_Project/frontend
+
+Install dependencies
+```
+npm install
+```
+Update the project
+```
+ng update
+```
+
+Update NPM
+```
+npm update
+```
+
+Run the application:
+```
+ng serve
+```
+Now open the following site in a browser to access the application:
+```
+http://localhost:4200
 ```
