@@ -5,6 +5,8 @@ from urllib.parse import urlparse
 
 
 class PredictionSerializer(serializers.ModelSerializer):
+    img_class = serializers.IntegerField()
+    img_label = serializers.CharField(max_length=50)
     file_url = serializers.SerializerMethodField('get_file_url')
 
     def get_file_url(self, obj):

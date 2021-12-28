@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from tensorflow_addons.metrics import F1Score
 from tensorflow import keras
 from pathlib import Path
+import modelUtils
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -138,8 +139,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 CLASSIFICATION_MODEL_NAME = 'Classification.h5'
-DETECTION_MODEL_NAME = 'DetectionModel.h5'
-
+CLASSIFICATION_IMG_SIZE = 224
 CLASSIFICATION_MODEL = keras.models.load_model(os.path.join(BASE_DIR, 'library', 'model', CLASSIFICATION_MODEL_NAME))
-# DETECTION_MODEL = keras.models.load_model(os.path.join(BASE_DIR, 'library', 'model', DETECTION_MODEL_NAME))
 
+DETECTION_MODEL_NAME = 'DetectionModel.h5'
+DETECTION_IMG_SIZE = 256
+DETECTION_MODEL = modelUtils.__load_model(os.path.join(BASE_DIR, 'library', 'model', DETECTION_MODEL_NAME))
