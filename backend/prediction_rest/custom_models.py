@@ -46,6 +46,7 @@ class Detection:
         self.preprocess_input()
 
     def preprocess_input(self):
+        print('In custom_models.Detection.preprocess_input')
         img = pydicom.dcmread(self.filename).pixel_array
         img = resize(img, (settings.DETECTION_IMG_SIZE,
                            settings.DETECTION_IMG_SIZE),
@@ -55,6 +56,8 @@ class Detection:
         self.pixel_array = np.array(self.pixel_array)
 
     def detect(self):
+        print('In custom_models.Detection.detect')
+        self.prediction = []
         preds = settings.DETECTION_MODEL.predict(self.pixel_array)
 
         for pred in preds:
@@ -67,8 +70,14 @@ class Detection:
                 h = y2 - y
                 w = x2 - x
                 self.prediction.append([x, y, w, h])
+        print(self.prediction)
 
     def generate_image(self, image_name):
+        print('In custom_models.Detection.generate_image(', image_name, ')')
+
+        if not self.prediction:
+            return False
+
         img = pydicom.dcmread(self.filename).pixel_array
         img = cv2.resize(img, (256, 256), interpolation=cv2.INTER_NEAREST)
         img = np.expand_dims(img, -1)
@@ -79,11 +88,10 @@ class Detection:
             y = pred[1]
             w = pred[2]
             h = pred[3]
-            img = cv2.rectangle(img, (x, y), (x + w, y + h), (36, 255, 12), 2)
-            cv2.putText(img, 'Penumonia', (x, y - 10), cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.50, (36, 255, 12), 2)
+            img = cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
+            cv2.putText(img, 'Pneumonia', (x, y - 10), cv2.FONT_HERSHEY_PLAIN, 0.75, (0, 0, 255), 1)
 
         PRED_ROOT = os.path.join(settings.MEDIA_ROOT, 'prediction')
-        if not os.path.exists(PRED_ROOT, exist_ok=True):
-            os.makedirs(PRED_ROOT)
-
-        cv2.imwrite(os.path.join(PRED_ROOT, image_name), img)
+        if not os.path.exists(PRED_ROOT):
+            os.makedirs(PRED_ROOT, exist_ok=True)
+        return cv2.imwrite(os.path.join(PRED_ROOT, image_name), img)

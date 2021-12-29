@@ -32,6 +32,9 @@ export class FileUploadComponent{
     .subscribe((resp:PredictResponse) =>{
       console.log(resp);
       this.result = resp.predict;
+      if (resp.predict_image != null){
+        this.imageURL = resp.predict_image
+      }
     });
   }
 
