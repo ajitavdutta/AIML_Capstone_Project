@@ -109,6 +109,23 @@ Run the server
 python manage.py runserver
 ```
 
+**Optional Step(s)**
+
+You will need to create a “superuser” account to access the admin interface. 
+Run the following command in your terminal:
+
+```
+python manage.py createsuperuser
+```
+
+You will be prompted to enter a username, email, and password for the superuser. 
+Be sure to enter details that you can remember because you will need them to log in to the admin dashboard.
+
+Recommended Values:
+* username: admin
+* email: <blank>
+* password: admin@123
+
 ### Angular Application - Frontend
 Open a command-prompt/terminal in the following location
 
