@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from tensorflow_addons.metrics import F1Score
 from tensorflow import keras
 from pathlib import Path
-import modelUtils
+from . import modelUtils
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from fileUpload.models import UploadFile
 from rest_framework.views import APIView
 from rest_framework import status
-from custom_models import Classification, Detection
+from .custom_models import Classification, Detection
 from django.conf import settings
 # from PIL import Image
 # import numpy as np

@@ -1,4 +1,4 @@
-from tensorflow.keras.applications.densenet import preprocess_input as DensePreprocess
+from tensorflow.keras.applications import densenet
 from django.conf import settings
 from skimage.transform import resize
 from skimage import measure
@@ -25,7 +25,7 @@ class Classification:
         image = Image.fromarray(image)
         image = image.convert('RGB')
         image = np.array(image, dtype=np.float32)
-        image = DensePreprocess(np.array(image, dtype=np.float32))
+        image = densenet.preprocess_input(np.array(image, dtype=np.float32))
         self.pixel_array.append(image)
         self.pixel_array = np.array(self.pixel_array)
 

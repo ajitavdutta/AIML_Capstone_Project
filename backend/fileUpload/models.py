@@ -27,6 +27,10 @@ class UploadFile(models.Model):
         image = np.array(image, dtype=np.float32)
         image = (image - image.min()) / (image.max() - image.min()) * 255.0
         image = image.astype(np.uint8)
+
+        if not os.path.exists(os.path.join(settings.MEDIA_ROOT, 'png'), exist_ok=True):
+            os.makedirs(os.path.join(settings.MEDIA_ROOT, 'png'))
+
         image_path = os.path.join(settings.MEDIA_ROOT, 'png', image_name)
         cv2.imwrite(image_path, image)
 
