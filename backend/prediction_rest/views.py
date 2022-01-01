@@ -1,11 +1,13 @@
 from rest_framework.parsers import MultiPartParser, FormParser
-from .custom_models import Classification, Detection
 from rest_framework.response import Response
+from .classification import Classification
+from .segmentation import Segmentation
 from rest_framework.reverse import reverse
 from fileUpload.models import UploadFile
 from rest_framework.views import APIView
 from rest_framework import status
 from urllib.parse import urlparse
+from .detection import Detection
 from django.conf import settings
 import os
 
@@ -21,17 +23,18 @@ class PredictView(APIView):
 
         clf = Classification(model=settings.CLASSIFICATION_MODEL,
                              filename=os.path.join(settings.MEDIA_ROOT, filename))
-        result = clf.classify()
+        result = clf.predict()
         if result == 1:
             label = 'Pneumonia'
 
-        detect = Detection(model=settings.DETECTION_MODEL,
-                           filename=os.path.join(settings.MEDIA_ROOT, filename))
-        detect.detect()
-        if detect.generate_image(os.path.basename(filename).replace('.dcm', '.png')):
-            image = os.path.basename(filename).replace('.dcm', '.png')
-        else:
-            label = 'Non-Pneumonia'
+        # detect = Detection(model=settings.DETECTION_MODEL,
+        #                    filename=os.path.join(settings.MEDIA_ROOT, filename))
+        # detect.predict()
+        # if detect.generate_image(os.path.basename(filename).replace('.dcm', '.png')):
+        #     image = os.path.basename(filename).replace('.dcm', '.png')
+
+        segment = Segmentation(os.path.join(settings.MEDIA_ROOT, filename))
+        image = segment.predict()
 
         return label, image
 

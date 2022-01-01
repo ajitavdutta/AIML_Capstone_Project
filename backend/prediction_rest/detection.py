@@ -1,40 +1,10 @@
-from tensorflow.keras.applications import densenet
-from django.conf import settings
 from skimage.transform import resize
+from django.conf import settings
 from skimage import measure
-from PIL import Image
 import numpy as np
 import pydicom
 import cv2
 import os
-
-
-class Classification:
-    def __init__(self, model, filename):
-        self.pixel_array = None
-        self.model = model
-        self.filename = filename
-        self.preprocess_input()
-
-    def preprocess_input(self):
-        self.pixel_array = []
-        image = pydicom.dcmread(os.path.join(settings.MEDIA_ROOT, self.filename)).pixel_array
-        image = cv2.resize(image, (settings.CLASSIFICATION_IMG_SIZE,
-                                   settings.CLASSIFICATION_IMG_SIZE),
-                           interpolation=cv2.INTER_NEAREST)
-        image = Image.fromarray(image)
-        image = image.convert('RGB')
-        image = np.array(image, dtype=np.float32)
-        image = densenet.preprocess_input(np.array(image, dtype=np.float32))
-        self.pixel_array.append(image)
-        self.pixel_array = np.array(self.pixel_array)
-
-    def classify(self):
-        predict = settings.CLASSIFICATION_MODEL.predict(self.pixel_array)
-        print(predict)
-        predict = np.round(predict).astype(int)
-        print(predict)
-        return predict[0][0]
 
 
 class Detection:
@@ -46,7 +16,7 @@ class Detection:
         self.preprocess_input()
 
     def preprocess_input(self):
-        print('In custom_models.Detection.preprocess_input')
+        print('In detection.Detection.preprocess_input')
         img = pydicom.dcmread(self.filename).pixel_array
         img = resize(img, (settings.DETECTION_IMG_SIZE,
                            settings.DETECTION_IMG_SIZE),
@@ -55,8 +25,8 @@ class Detection:
         self.pixel_array = [img]
         self.pixel_array = np.array(self.pixel_array)
 
-    def detect(self):
-        print('In custom_models.Detection.detect')
+    def predict(self):
+        print('In detection.Detection.detect')
         self.prediction = []
         preds = settings.DETECTION_MODEL.predict(self.pixel_array)
 
@@ -73,7 +43,7 @@ class Detection:
         print(self.prediction)
 
     def generate_image(self, image_name):
-        print('In custom_models.Detection.generate_image(', image_name, ')')
+        print('In detection.Detection.generate_image(', image_name, ')')
 
         if not self.prediction:
             return False
@@ -91,7 +61,4 @@ class Detection:
             img = cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
             cv2.putText(img, 'Pneumonia', (x, y - 10), cv2.FONT_HERSHEY_PLAIN, 0.75, (0, 0, 255), 1)
 
-        PRED_ROOT = os.path.join(settings.MEDIA_ROOT, 'prediction')
-        if not os.path.exists(PRED_ROOT):
-            os.makedirs(PRED_ROOT, exist_ok=True)
-        return cv2.imwrite(os.path.join(PRED_ROOT, image_name), img)
+        return cv2.imwrite(os.path.join(settings.PREDICTION_PATH, image_name), img)
