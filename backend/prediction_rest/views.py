@@ -27,14 +27,14 @@ class PredictView(APIView):
         if result == 1:
             label = 'Pneumonia'
 
-        # detect = Detection(model=settings.DETECTION_MODEL,
-        #                    filename=os.path.join(settings.MEDIA_ROOT, filename))
-        # detect.predict()
-        # if detect.generate_image(os.path.basename(filename).replace('.dcm', '.png')):
-        #     image = os.path.basename(filename).replace('.dcm', '.png')
+        detect = Detection(model=settings.DETECTION_MODEL,
+                           filename=os.path.join(settings.MEDIA_ROOT, filename))
+        detect.predict()
+        if detect.generate_image(os.path.basename(filename).replace('.dcm', '.png')):
+            image = os.path.basename(filename).replace('.dcm', '.png')
 
-        segment = Segmentation(os.path.join(settings.MEDIA_ROOT, filename))
-        image = segment.predict()
+        # segment = Segmentation(os.path.join(settings.MEDIA_ROOT, filename))
+        # image = segment.predict()
 
         return label, image
 
