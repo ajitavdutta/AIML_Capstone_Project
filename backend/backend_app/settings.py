@@ -149,17 +149,17 @@ DETECTION_IMG_SIZE = 256
 DETECTION_MODEL = modelUtils.__load_model(os.path.join(BASE_DIR, 'library', 'model', DETECTION_MODEL_NAME))
 
 
-SEGMENTATION_IMG_SIZE = 640
-SEGMENT_RUN_PATH = os.path.join(MEDIA_ROOT, f"runs{os.path.sep}detect")
-YOLOV5_DIR = os.path.join(BASE_DIR, 'yolov5') 
+#SEGMENTATION_IMG_SIZE = 640
+#SEGMENT_RUN_PATH = os.path.join(MEDIA_ROOT, f"runs{os.path.sep}detect")
+#YOLOV5_DIR = os.path.join(BASE_DIR, 'yolov5')
 #CFG_FILE_PATH = os.path.join(YOLOV5_DIR, f"models{os.path.sep}yolov5s.yaml")
 #HYPS_PATH = os.path.join(YOLOV5_DIR, f"data{os.path.sep}hyps{os.path.sep}hyp.scratch.yaml")
 #DATA_CFG_PATH = os.path.join(YOLOV5_DIR, f"data{os.path.sep}data_cfg.yaml")
 # YOLO_PROJECT_PATH = os.path.join(MEDIA_ROOT, "yolo_out_dir")
-WEIGHTS_PATH = os.path.join(YOLOV5_DIR, f"weights{os.path.sep}best.pt")
+#WEIGHTS_PATH = os.path.join(YOLOV5_DIR, f"weights{os.path.sep}best.pt")
 
-if not os.path.exists(SEGMENT_RUN_PATH):
-    os.makedirs(SEGMENT_RUN_PATH, exist_ok=True)
+# if not os.path.exists(SEGMENT_RUN_PATH):
+#     os.makedirs(SEGMENT_RUN_PATH, exist_ok=True)
 
 if not os.path.exists(PREDICTION_PATH):
     os.makedirs(PREDICTION_PATH, exist_ok=True)
