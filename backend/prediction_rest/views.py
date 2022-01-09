@@ -36,6 +36,9 @@ class PredictView(APIView):
         # segment = Segmentation(os.path.join(settings.MEDIA_ROOT, filename))
         # image = segment.predict()
 
+        if image is None:
+            label = 'Non-Pneumonia'
+
         return label, image
 
     def get(self, request, *args, **kwargs):
